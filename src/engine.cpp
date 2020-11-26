@@ -474,6 +474,7 @@ void engineSetSampleRate(float newSampleRate) {
 	global->engine.sampleTime = 1.0 / global->engine.sampleRate;
 	// onSampleRateChange
 	for (Module *module : global->gModules) {
+      printf("xxx engineSetSampleRate: module=%p\n", module); fflush(stdout);
 		module->onSampleRateChange();
 	}
 }

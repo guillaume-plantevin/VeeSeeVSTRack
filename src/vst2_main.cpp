@@ -92,6 +92,7 @@ extern void vst2_set_shared_plugin_tls_globals (void);  // see plugin.cpp
 extern void vst2_begin_shared_plugin_redraw (void);  // see plugin.cpp
 #endif // USE_BEGIN_REDRAW_FXN
 extern "C" { extern int vst2_handle_effeditkeydown (unsigned int _vkey); }
+void vst2_set_globals (void *_wrapper);
 
 namespace rack {
    extern bool b_touchkeyboard_enable;
@@ -874,6 +875,7 @@ public:
       bool r = false;
 
       // Dprintf("xxx setSampleRate: ENTER bLock=%d\n", _bLock);
+      printf("xxx setSampleRate: 1\n"); fflush(stdout);
 
       if((_rate >= float(MIN_SAMPLE_RATE)) && (_rate <= float(MAX_SAMPLE_RATE)))
       {
@@ -885,9 +887,15 @@ public:
 
          sample_rate = _rate;
 
+         printf("xxx setSampleRate: 2\n"); fflush(stdout);
+
          vst2_set_samplerate(sample_rate * oversample.factor);  // see engine.cpp
 
+         printf("xxx setSampleRate: 3\n"); fflush(stdout);
+
          destroyResamplerStates();
+
+         printf("xxx setSampleRate: 4\n"); fflush(stdout);
 
          // Lazy-alloc resampler state
          if(!Dfltequal(oversample.factor, 1.0f))
@@ -911,10 +919,14 @@ public:
             Dprintf("xxx vstrack_plugin: initialize speex resampler (rate=%f factor=%f quality=%d)\n", sample_rate, oversample.factor, oversample.quality);
          }
 
+         printf("xxx setSampleRate: 5\n"); fflush(stdout);
+
          if(_bLock)
          {
             unlockAudio();
          }
+
+         printf("xxx setSampleRate: 6\n"); fflush(stdout);
 
          r = true;
       }
@@ -1803,10 +1815,20 @@ VstIntPtr VSTPluginDispatcher(VSTPlugin *vstPlugin,
          break;
 
       case effSetSampleRate:
+         printf("xxx effSetSampleRate(%f) wrapper=%p\n", opt, wrapper); fflush(stdout);
+
+         // update plugin TLS
+         //  [26Nov2020] fixes dynamically loaded module crash when effSetSampleRate is called directly after loading patch (before first processReplacing call)
+         vst2_set_globals((void*)wrapper);
+
          r = wrapper->setSampleRate(opt) ? 1 : 0;
          break;
 
       case effSetBlockSize:
+         // update plugin TLS
+         //  [26Nov2020] fixes dynamically loaded module crash when effSetSampleRate is called directly after loading patch (before first processReplacing call)
+         vst2_set_globals((void*)wrapper);
+
          r = wrapper->setBlockSize(uint32_t(value)) ? 1 : 0;
          break;
 
