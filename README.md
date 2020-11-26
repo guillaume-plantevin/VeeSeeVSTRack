@@ -46,6 +46,9 @@
 - [veeseevstrack_0_6_1_win64_bin-24May2019.7z](https://github.com/bsp2/releases/raw/master/vsvr/veeseevstrack_0_6_1_win64_bin-24May2019.7z) (64bit)
 - [veeseevstrack_0_6_1_win32_bin-24May2019.7z](https://github.com/bsp2/releases/raw/master/vsvr/veeseevstrack_0_6_1_win32_bin-24May2019.7z) (32bit, experimental)
 
+UPDATE: (26Nov2020): [incremental win64 hotfix](https://github.com/bsp2/releases/raw/master/vsvr/vsvr-setsamplerate_hotfix-win64-26Nov2020.7z) for `effSetSampleRate` related crash-after-patch-restore issue (please replace `veeseevstrack_*` DLLs in 24May2019 release)
+
+
 ## Linux
 - [veeseevstrack_0_6_1_lin64_bin-24May2019.tar.gz](http://linux-sound.org/misc/veeseevstrack_0_6_1_lin64_bin-24May2019.tar.gz) (64bit) (Dave's latest build)
   *NOTE*: for the file, message, and color picker dialogs to work, "zenity" needs to be installed, e.g. via `$ sudo apt-get install zenity`
