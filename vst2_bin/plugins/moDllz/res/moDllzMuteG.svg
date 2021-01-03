@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="67px" height="12px" viewBox="0 0 67 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="gateMute" stroke="#729298" x="0.5" y="0.5" width="66" height="11" rx="5"></rect>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="67" height="12" version="1.1" viewBox="0 0 67 12"><g id="Page-1" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><rect id="gateMute" width="66" height="11" x=".5" y=".5" stroke="#729298" rx="5"/></g></svg>
